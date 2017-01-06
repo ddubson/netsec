@@ -1,6 +1,5 @@
 package com.netsec;
 
-import org.pcap4j.core.Pcaps;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 
@@ -23,14 +22,7 @@ public class Application implements CommandLineRunner {
             System.out.print("> ");
             String cmd = scanner.nextLine();
 
-            if (cmd.equals("nifs")) {
-                System.out.println("Network Interfaces:");
-                Pcaps.findAllDevs().stream().forEach(ifs -> {
-                    System.out.println(ifs.getName());
-                });
-            } else if (cmd.equals("exit")) {
-                System.exit(0);
-            }
+            CommandFactory.getCommand(cmd).exec();
         }
     }
 }
