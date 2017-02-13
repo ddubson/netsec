@@ -13,4 +13,9 @@ public class ExitCommand implements Command {
     public String getName() {
         return Name.EXIT;
     }
+
+    @Override
+    public String getDescription() {
+        return "Exit the application.";
+    }
 }

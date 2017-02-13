@@ -1,6 +1,6 @@
 package com.netsec.command;
 
-import com.netsec.command.Command;
+import com.netsec.network.LocalDeviceInfo;
 import org.pcap4j.core.PcapAddress;
 import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.PcapNetworkInterface;
@@ -14,20 +14,24 @@ import java.net.Inet6Address;
  * Author: ddubson
  */
 public class DescribeNifCommand implements Command {
+    private LocalDeviceInfo localDeviceInfo;
+
+    public DescribeNifCommand(LocalDeviceInfo localDeviceInfo) {
+        this.localDeviceInfo = localDeviceInfo;
+    }
+
     @Override
     public void exec(String... args) {
         if (args.length == 0) {
             System.out.println("Network interface not specified.");
-            return;
         }
 
         try {
             if(Pcaps.getDevByName(args[0]) == null) {
                 System.out.println("Network interface '" + args[0] + "' does not exist.");
-                return;
             }
 
-            PcapNetworkInterface nif = Pcaps.getDevByName(args[0]);
+            PcapNetworkInterface nif = localDeviceInfo.getLocalInterfaceInfo(args[0]);
             System.out.println("Network Interface '" + nif.getName() + "':");
             System.out.println("\tDescription: " + nif.getDescription());
             System.out.println("\tLink Layer Addr: ");
@@ -47,6 +51,11 @@ public class DescribeNifCommand implements Command {
     @Override
     public String getName() {
         return Name.DESCRIBE_NIF;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Describe specified device interface.";
     }
 
     private String determineIPversion(PcapAddress addr) {

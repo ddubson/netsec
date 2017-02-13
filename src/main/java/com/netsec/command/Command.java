@@ -8,10 +8,13 @@ public interface Command {
 
     String getName();
 
-    public static class Name {
+    String getDescription();
+
+    class Name {
         public static final String DESCRIBE_NIF = "describe";
         public static final String LIST_NIFS = "nifs";
         public static final String NO_ACTION = "no-action";
+        public static final String HELP = "help";
         public static final String EXIT = "exit";
     }
 }

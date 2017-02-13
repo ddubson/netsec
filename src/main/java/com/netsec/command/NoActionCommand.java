@@ -13,4 +13,9 @@ public class NoActionCommand implements Command {
     public String getName() {
         return Name.NO_ACTION;
     }
+
+    @Override
+    public String getDescription() {
+        return "";
+    }
 }

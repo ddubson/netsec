@@ -1,7 +1,9 @@
 package com.netsec.command;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Author: ddubson
@@ -23,5 +25,9 @@ public class CommandFactory {
         } else {
             return this.commands.get(Command.Name.NO_ACTION);
         }
+    }
+
+    public List<Command> getAllCommands() {
+        return commands.values().stream().collect(Collectors.toList());
     }
 }

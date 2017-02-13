@@ -1,5 +1,6 @@
 package com.netsec.cli;
 
+import com.netsec.command.Command;
 import com.netsec.command.CommandFactory;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.boot.CommandLineRunner;
@@ -13,6 +14,16 @@ import java.util.Scanner;
  * Author: ddubson
  */
 public class CLI implements CommandLineRunner {
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+
     private final CommandFactory commandFactory;
     private final String appBanner;
 
@@ -23,6 +34,7 @@ public class CLI implements CommandLineRunner {
 
     public void run(String... args) throws Exception {
         System.out.println(appBanner);
+        commandFactory.getCommand(Command.Name.HELP).exec();
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -37,5 +49,9 @@ public class CLI implements CommandLineRunner {
 
             commandFactory.getCommand(cmd).exec(cmdArgs.toArray(new String[0]));
         }
+    }
+
+    public static String colorize(String s, String AnsiColor) {
+        return AnsiColor + s + ANSI_RESET;
     }
 }
