@@ -8,4 +8,9 @@ public class NoActionCommand implements Command {
     public void exec(String... args) {
         System.out.println("Command not found.");
     }
+
+    @Override
+    public String getName() {
+        return Name.NO_ACTION;
+    }
 }

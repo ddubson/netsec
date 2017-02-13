@@ -35,4 +35,9 @@ public class NifListCommand implements Command {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public String getName() {
+        return Name.LIST_NIFS;
+    }
 }

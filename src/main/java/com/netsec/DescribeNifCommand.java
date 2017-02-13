@@ -37,9 +37,15 @@ public class DescribeNifCommand implements Command {
             for (PcapAddress addr : nif.getAddresses()) {
                 System.out.println("\t\t"+determineIPversion(addr)+": " + addr.getAddress() + "");
             }
+            
         } catch (PcapNativeException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public String getName() {
+        return Name.DESCRIBE_NIF;
     }
 
     private String determineIPversion(PcapAddress addr) {
