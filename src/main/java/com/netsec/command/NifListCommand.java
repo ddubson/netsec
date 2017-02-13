@@ -7,6 +7,9 @@ import org.pcap4j.util.LinkLayerAddress;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.netsec.cli.CLI.ANSI_BLUE;
+import static com.netsec.cli.CLI.colorize;
+
 /**
  * Author: ddubson
  */
@@ -23,7 +26,7 @@ public class NifListCommand implements Command {
         List<PcapNetworkInterface> nifs = localDeviceInfo.getLocalInterfaces();
         nifs.sort(Comparator.comparing(PcapNetworkInterface::getName));
         for (PcapNetworkInterface nif : nifs) {
-            System.out.format("%-10s", nif.getName());
+            System.out.format("%-20s", colorize(nif.getName(), ANSI_BLUE));
             System.out.print(
                     (nif.getDescription() != null && !nif.getDescription().isEmpty()
                             ? " [" + nif.getDescription() + "]" : ""));
@@ -35,6 +38,7 @@ public class NifListCommand implements Command {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     @Override

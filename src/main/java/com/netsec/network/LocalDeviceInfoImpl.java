@@ -30,4 +30,14 @@ public class LocalDeviceInfoImpl implements LocalDeviceInfo {
             throw new RuntimeException("Error fetching device info.");
         }
     }
+
+    @Override
+    public boolean deviceExists(String devName) {
+        try {
+            return Pcaps.getDevByName(devName) != null;
+        } catch (PcapNativeException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

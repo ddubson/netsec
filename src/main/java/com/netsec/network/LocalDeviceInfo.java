@@ -11,4 +11,6 @@ public interface LocalDeviceInfo {
     List<PcapNetworkInterface> getLocalInterfaces();
 
     PcapNetworkInterface getLocalInterfaceInfo(String devName);
+
+    boolean deviceExists(String devName);
 }
