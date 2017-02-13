@@ -1,4 +1,4 @@
-package com.netsec;
+package com.netsec.command;
 
 import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.PcapNetworkInterface;

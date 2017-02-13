@@ -1,9 +1,7 @@
-package com.netsec;
+package com.netsec.command;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.netsec.Command.Name.NO_ACTION;
 
 /**
  * Author: ddubson
@@ -23,7 +21,7 @@ public class CommandFactory {
         if(this.commands.containsKey(cmdName)) {
             return this.commands.get(cmdName);
         } else {
-            return this.commands.get(NO_ACTION);
+            return this.commands.get(Command.Name.NO_ACTION);
         }
     }
 }
