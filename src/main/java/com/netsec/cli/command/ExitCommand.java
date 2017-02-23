@@ -1,21 +1,21 @@
-package com.netsec.command;
+package com.netsec.cli.command;
 
 /**
  * Author: ddubson
  */
-public class NoActionCommand implements Command {
+public class ExitCommand implements Command {
     @Override
     public void exec(String... args) {
-        System.out.println("Command not found.");
+        System.exit(0);
     }
 
     @Override
     public String getName() {
-        return Name.NO_ACTION;
+        return Name.EXIT;
     }
 
     @Override
     public String getDescription() {
-        return "";
+        return "Exit the application.";
     }
 }

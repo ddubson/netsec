@@ -1,4 +1,4 @@
-package com.netsec.command;
+package com.netsec.cli.command;
 
 /**
  * Author: ddubson

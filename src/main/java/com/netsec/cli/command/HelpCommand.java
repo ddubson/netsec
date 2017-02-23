@@ -1,4 +1,4 @@
-package com.netsec.command;
+package com.netsec.cli.command;
 
 import static com.netsec.cli.CLI.ANSI_RED;
 import static com.netsec.cli.CLI.colorize;
