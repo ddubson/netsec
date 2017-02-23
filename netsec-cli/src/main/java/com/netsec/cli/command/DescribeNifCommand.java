@@ -1,6 +1,6 @@
-package com.netsec.command;
+package com.netsec.cli.command;
 
-import com.netsec.network.LocalDeviceInfo;
+import com.netsec.core.network.LocalDeviceInfo;
 import org.pcap4j.core.PcapAddress;
 import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.util.LinkLayerAddress;

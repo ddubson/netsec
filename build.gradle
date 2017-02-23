@@ -1,32 +1,10 @@
-buildscript {
-    ext {
-        springBootVersion = '1.4.4.RELEASE'
-    }
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-    }
-}
-
 apply plugin: 'java'
 apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
-}
-
-dependencies {
-    compile 'org.springframework.boot:spring-boot-starter:1.4.2.RELEASE'
-    compile 'org.pcap4j:pcap4j-core:1.7.0'
-    compile 'org.pcap4j:pcap4j-packetfactory-static:1.7.0'
-    compile 'net.sf.jopt-simple:jopt-simple:6.0-alpha-1'
-    compile 'org.apache.commons:commons-lang3:3.5'
-    testCompile 'junit:junit:4.12'
 }
 

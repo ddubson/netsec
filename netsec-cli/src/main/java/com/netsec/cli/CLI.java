@@ -1,7 +1,7 @@
 package com.netsec.cli;
 
-import com.netsec.command.Command;
-import com.netsec.command.CommandFactory;
+import com.netsec.cli.command.Command;
+import com.netsec.cli.command.CommandFactory;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.boot.CommandLineRunner;
 

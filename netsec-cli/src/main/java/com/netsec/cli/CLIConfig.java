@@ -1,8 +1,8 @@
 package com.netsec.cli;
 
-import com.netsec.command.*;
-import com.netsec.network.LocalDeviceInfo;
-import com.netsec.network.LocalDeviceInfoImpl;
+import com.netsec.cli.command.*;
+import com.netsec.core.network.LocalDeviceInfo;
+import com.netsec.core.network.LocalDeviceInfoImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

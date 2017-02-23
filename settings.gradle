@@ -1,1 +1,3 @@
 rootProject.name = 'netsec'
+include 'netsec-core'
+include 'netsec-cli'

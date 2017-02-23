@@ -1,4 +1,4 @@
-package com.netsec.command;
+package com.netsec.cli.command;
 
 import java.util.HashMap;
 import java.util.List;
