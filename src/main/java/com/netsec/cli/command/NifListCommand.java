@@ -4,6 +4,7 @@ import com.netsec.core.network.LocalDeviceInfo;
 import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.util.LinkLayerAddress;
 
+import java.io.PrintStream;
 import java.util.Comparator;
 import java.util.List;
 
@@ -21,24 +22,24 @@ public class NifListCommand implements Command {
     }
 
     @Override
-    public void exec(String... args) {
-        System.out.println("Network Interfaces on Device:");
+    public void exec(PrintStream printStream, String... args) {
+        printStream.println("Network Interfaces on Device:");
         List<PcapNetworkInterface> nifs = localDeviceInfo.getLocalInterfaces();
         nifs.sort(Comparator.comparing(PcapNetworkInterface::getName));
         for (PcapNetworkInterface nif : nifs) {
-            System.out.format("%-20s", colorize(nif.getName(), ANSI_BLUE));
-            System.out.print(
+            printStream.format("%-20s", colorize(nif.getName(), ANSI_BLUE));
+            printStream.print(
                     (nif.getDescription() != null && !nif.getDescription().isEmpty()
                             ? " [" + nif.getDescription() + "]" : ""));
             if (!nif.getLinkLayerAddresses().isEmpty()) {
-                System.out.format("%s", "| MAC(s): ");
+                printStream.format("%s", "| MAC(s): ");
                 for (LinkLayerAddress addr : nif.getLinkLayerAddresses()) {
-                    System.out.print(addr.toString() + " ");
+                    printStream.print(addr.toString() + " ");
                 }
             }
-            System.out.println();
+            printStream.println();
         }
-        System.out.println();
+        printStream.println();
     }
 
     @Override

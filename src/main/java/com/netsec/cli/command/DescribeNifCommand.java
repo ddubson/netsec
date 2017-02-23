@@ -5,6 +5,7 @@ import org.pcap4j.core.PcapAddress;
 import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.util.LinkLayerAddress;
 
+import java.io.PrintStream;
 import java.net.Inet4Address;
 import java.net.Inet6Address;
 
@@ -19,25 +20,25 @@ public class DescribeNifCommand implements Command {
     }
 
     @Override
-    public void exec(String... args) {
+    public void exec(PrintStream printStream, String... args) {
         if (args.length == 0) {
-            System.out.println("Network interface not specified.");
+            printStream.println("Network interface not specified.");
         }
 
         if (!localDeviceInfo.deviceExists(args[0])) {
-            System.out.println("Network interface '" + args[0] + "' does not exist.");
+            printStream.println("Network interface '" + args[0] + "' does not exist.");
         }
 
         PcapNetworkInterface nif = localDeviceInfo.getLocalInterfaceInfo(args[0]);
-        System.out.println("Network Interface '" + nif.getName() + "':");
-        System.out.println("\tDescription: " + nif.getDescription());
-        System.out.println("\tLink Layer Addr: ");
+        printStream.println("Network Interface '" + nif.getName() + "':");
+        printStream.println("\tDescription: " + nif.getDescription());
+        printStream.println("\tLink Layer Addr: ");
         for (LinkLayerAddress addr : nif.getLinkLayerAddresses()) {
-            System.out.println("\t\t[" + addr.toString() + "]");
+            printStream.println("\t\t[" + addr.toString() + "]");
         }
-        System.out.println("\tNetwork Layer Addr: ");
+        printStream.println("\tNetwork Layer Addr: ");
         for (PcapAddress addr : nif.getAddresses()) {
-            System.out.println("\t\t" + determineIPversion(addr) + ": " + addr.getAddress() + "");
+            printStream.println("\t\t" + determineIPversion(addr) + ": " + addr.getAddress() + "");
         }
     }
 

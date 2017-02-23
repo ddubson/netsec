@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import java.io.PrintStream;
+
 import static com.netsec.cli.CLI.ANSI_GREEN;
 import static com.netsec.cli.CLI.colorize;
 
@@ -19,7 +21,7 @@ import static com.netsec.cli.CLI.colorize;
 public class CLIConfig {
     @Bean
     public CommandLineRunner cli() {
-        return new CLI(commandFactory(), appBanner());
+        return new CLI(commandFactory(), appBanner(), printStream());
     }
 
     @Bean
@@ -41,5 +43,10 @@ public class CLIConfig {
     @Bean
     public LocalDeviceInfo localDeviceInfo() {
         return new LocalDeviceInfoImpl();
+    }
+
+    @Bean
+    public PrintStream printStream() {
+        return System.out;
     }
 }

@@ -1,12 +1,14 @@
 package com.netsec.cli.command;
 
+import java.io.PrintStream;
+
 /**
  * Author: ddubson
  */
 public class NoActionCommand implements Command {
     @Override
-    public void exec(String... args) {
-        System.out.println("Command not found.");
+    public void exec(PrintStream printStream, String... args) {
+        printStream.println("Command not found.");
     }
 
     @Override

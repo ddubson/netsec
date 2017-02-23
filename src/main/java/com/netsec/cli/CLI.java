@@ -5,6 +5,7 @@ import com.netsec.cli.command.CommandFactory;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.boot.CommandLineRunner;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,19 +27,21 @@ public class CLI implements CommandLineRunner {
 
     private final CommandFactory commandFactory;
     private final String appBanner;
+    private final PrintStream printStream;
 
-    public CLI(CommandFactory commandFactory, String appBanner) {
+    public CLI(CommandFactory commandFactory, String appBanner, PrintStream printStream) {
         this.commandFactory = commandFactory;
         this.appBanner = appBanner;
+        this.printStream = printStream;
     }
 
     public void run(String... args) throws Exception {
         System.out.println(appBanner);
-        commandFactory.getCommand(Command.Name.HELP).exec();
+        commandFactory.getCommand(Command.Name.HELP).exec(printStream);
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.print("> ");
+            printStream.print("> ");
             String cmd = scanner.nextLine();
             List<String> cmdArgs = new ArrayList<>();
             if(cmd.contains(" ")) {
@@ -47,7 +50,7 @@ public class CLI implements CommandLineRunner {
                 cmdArgs = Arrays.asList(ArrayUtils.subarray(ls, 1, ls.length));
             }
 
-            commandFactory.getCommand(cmd).exec(cmdArgs.toArray(new String[0]));
+            commandFactory.getCommand(cmd).exec(printStream, cmdArgs.toArray(new String[0]));
         }
     }
 

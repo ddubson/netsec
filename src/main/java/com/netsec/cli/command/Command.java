@@ -1,10 +1,12 @@
 package com.netsec.cli.command;
 
+import java.io.PrintStream;
+
 /**
  * Author: ddubson
  */
 public interface Command {
-    void exec(String... args);
+    void exec(PrintStream printStream, String... args);
 
     String getName();
 

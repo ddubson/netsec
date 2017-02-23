@@ -1,11 +1,13 @@
 package com.netsec.cli.command;
 
+import java.io.PrintStream;
+
 /**
  * Author: ddubson
  */
 public class ExitCommand implements Command {
     @Override
-    public void exec(String... args) {
+    public void exec(PrintStream printStream, String... args) {
         System.exit(0);
     }
 

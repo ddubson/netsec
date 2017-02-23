@@ -1,5 +1,7 @@
 package com.netsec.cli.command;
 
+import java.io.PrintStream;
+
 import static com.netsec.cli.CLI.ANSI_RED;
 import static com.netsec.cli.CLI.colorize;
 
@@ -14,14 +16,14 @@ public class HelpCommand implements Command {
     }
 
     @Override
-    public void exec(String... args) {
-        System.out.println("Commands:");
+    public void exec(PrintStream printStream, String... args) {
+        printStream.println("Commands:");
 
         commandFactory.getAllCommands().forEach(command -> {
-            System.out.println("\t"+ colorize(command.getName(), ANSI_RED) + ": " + command.getDescription());
+            printStream.println("\t"+ colorize(command.getName(), ANSI_RED) + ": " + command.getDescription());
         });
 
-        System.out.println();
+        printStream.println();
     }
 
     @Override
