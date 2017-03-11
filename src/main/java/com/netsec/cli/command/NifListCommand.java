@@ -14,15 +14,16 @@ import static com.netsec.cli.CLI.colorize;
 /**
  * Author: ddubson
  */
-public class NifListCommand implements Command {
+public class NifListCommand extends CLICommand {
     private LocalDeviceInfo localDeviceInfo;
 
-    public NifListCommand(LocalDeviceInfo localDeviceInfo) {
+    public NifListCommand(PrintStream printStream, LocalDeviceInfo localDeviceInfo) {
+        super(printStream);
         this.localDeviceInfo = localDeviceInfo;
     }
 
     @Override
-    public void exec(PrintStream printStream, String... args) {
+    public void exec(List<String> args) {
         printStream.println("Network Interfaces on Device:");
         List<PcapNetworkInterface> nifs = localDeviceInfo.getLocalInterfaces();
         nifs.sort(Comparator.comparing(PcapNetworkInterface::getName));

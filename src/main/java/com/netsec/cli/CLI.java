@@ -1,10 +1,11 @@
 package com.netsec.cli;
 
 import com.netsec.cli.command.Command;
-import com.netsec.cli.command.CommandFactory;
+import com.netsec.cli.command.CommandPublisher;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.boot.CommandLineRunner;
 
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,33 +26,32 @@ public class CLI implements CommandLineRunner {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
-    private final CommandFactory commandFactory;
+    private final CommandPublisher commandPublisher;
     private final String appBanner;
     private final PrintStream printStream;
+    private final Scanner inputReader;
 
-    public CLI(CommandFactory commandFactory, String appBanner, PrintStream printStream) {
-        this.commandFactory = commandFactory;
+    public CLI(CommandPublisher commandPublisher, String appBanner, PrintStream printStream, Scanner inputReader) {
+        this.commandPublisher = commandPublisher;
         this.appBanner = appBanner;
         this.printStream = printStream;
+        this.inputReader = inputReader;
     }
 
     public void run(String... args) throws Exception {
-        System.out.println(appBanner);
-        commandFactory.getCommand(Command.Name.HELP).exec(printStream);
-        Scanner scanner = new Scanner(System.in);
+        printStream.println(appBanner);
+        commandPublisher.publish(Command.Name.HELP);
 
-        while (true) {
-            printStream.print("> ");
-            String cmd = scanner.nextLine();
-            List<String> cmdArgs = new ArrayList<>();
-            if(cmd.contains(" ")) {
-                String[] ls = cmd.split(" ");
-                cmd = ls[0];
-                cmdArgs = Arrays.asList(ArrayUtils.subarray(ls, 1, ls.length));
-            }
+        printCLILinePrefix();
+        commandPublisher.publish(readInputAndSplitIntoArgs());
+    }
 
-            commandFactory.getCommand(cmd).exec(printStream, cmdArgs.toArray(new String[0]));
-        }
+    private String[] readInputAndSplitIntoArgs() {
+        return inputReader.nextLine().split(" ");
+    }
+
+    private void printCLILinePrefix() {
+        printStream.print("> ");
     }
 
     public static String colorize(String s, String AnsiColor) {

@@ -8,28 +8,28 @@ import org.pcap4j.util.LinkLayerAddress;
 import java.io.PrintStream;
 import java.net.Inet4Address;
 import java.net.Inet6Address;
+import java.util.List;
 
-/**
- * Author: ddubson
- */
-public class DescribeNifCommand implements Command {
+public class DescribeNifCommand extends CLICommand {
     private LocalDeviceInfo localDeviceInfo;
 
-    public DescribeNifCommand(LocalDeviceInfo localDeviceInfo) {
+    public DescribeNifCommand(PrintStream printStream, LocalDeviceInfo localDeviceInfo) {
+        super(printStream);
         this.localDeviceInfo = localDeviceInfo;
     }
 
     @Override
-    public void exec(PrintStream printStream, String... args) {
-        if (args.length == 0) {
+    public void exec(List<String> args) {
+        if (args == null || args.size() < 1) {
             printStream.println("Network interface not specified.");
+            return;
         }
 
-        if (!localDeviceInfo.deviceExists(args[0])) {
-            printStream.println("Network interface '" + args[0] + "' does not exist.");
+        if (!localDeviceInfo.deviceExists(args.get(0))) {
+            printStream.println("Network interface '" + args.get(0) + "' does not exist.");
         }
 
-        PcapNetworkInterface nif = localDeviceInfo.getLocalInterfaceInfo(args[0]);
+        PcapNetworkInterface nif = localDeviceInfo.getLocalInterfaceInfo(args.get(0));
         printStream.println("Network Interface '" + nif.getName() + "':");
         printStream.println("\tDescription: " + nif.getDescription());
         printStream.println("\tLink Layer Addr: ");

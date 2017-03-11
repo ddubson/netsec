@@ -1,12 +1,14 @@
 package com.netsec.cli.command;
 
-import java.io.PrintStream;
+import java.util.List;
 
 /**
  * Author: ddubson
  */
 public interface Command {
-    void exec(PrintStream printStream, String... args);
+    void exec(List<String> args);
+
+    boolean isResponsible(String cmdName);
 
     String getName();
 
