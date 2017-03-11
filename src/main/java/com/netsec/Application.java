@@ -3,9 +3,6 @@ package com.netsec;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * Author: ddubson
- */
 @SpringBootApplication
 public class Application {
     public static void main(String[] args) {
