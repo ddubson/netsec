@@ -1,6 +1,10 @@
+ext {
+	springBootVersion = '1.5.2.RELEASE'
+}
+
 buildscript {
     ext {
-        springBootVersion = '1.5.1.RELEASE'
+        springBootVersion = '1.5.2.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -21,10 +25,10 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+		compile project(":netsec-core")
     compile 'org.pcap4j:pcap4j-core:1.7.0'
     compile 'org.pcap4j:pcap4j-packetfactory-static:1.7.0'
     compile 'org.apache.commons:commons-lang3:3.5'
-    compile 'org.springframework.boot:spring-boot-starter:1.5.1.RELEASE'
-    compile project(":netsec-core")
+    compile "org.springframework.boot:spring-boot-starter:$springBootVersion"
+		testCompile "junit:junit:4.12"
 }
